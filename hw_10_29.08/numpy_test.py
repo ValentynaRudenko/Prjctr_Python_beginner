@@ -18,3 +18,4 @@ x.max(axis=1)
 rng = np.random.default_rng()
 samples = rng.normal(size=2500)
 print(samples)
+
