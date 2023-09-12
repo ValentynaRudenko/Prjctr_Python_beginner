@@ -1,12 +1,23 @@
+from inspect import signature
+
+
 def check_types(func):
     def wrapper(*args, **kwargs):
-        arg_status = [isinstance(arg, int) for arg in args]
-        args_status = all(arg_status)
-        if args_status == True:
-            func(*args, **kwargs)
-            print(func(*args, **kwargs))
-        else:
-            print("TypeError: Arguments must be int not str")
+        argnames = func.__code__.co_varnames[:func.__code__.co_argcount]
+        for i, arg in enumerate(args):
+            arg_name = argnames[i]
+            s = signature(func)
+            expected_type = s.parameters[arg_name].annotation
+            actual_type = type(arg)
+
+            if isinstance(arg, expected_type):
+                result = func(*args, **kwargs)
+                print(result)
+                return result
+            else:
+                print(f"TypeError: Argument {arg} must be "
+                      f"{expected_type.__name__} not {actual_type.__name__}")
+
     return wrapper
 
 
