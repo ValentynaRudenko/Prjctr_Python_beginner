@@ -10,7 +10,7 @@ class Car:
         print(f"Accelerating to {self.speed} kph")
 
     def brake_5(self):
-        self.speed -= 5
+        self.speed = max(self.speed - 5, 0)
         print(f"Braking to {self.speed} kph")
 
 
