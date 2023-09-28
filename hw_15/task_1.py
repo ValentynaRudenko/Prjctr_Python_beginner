@@ -13,8 +13,16 @@ class Book(Product):
         super().__init__(name, price, quantity)
         self.author = author
 
-    def read(cls, filename):
-        instances = []
-        with open(filename) as file:
-            for row in file:
-                instances.append(cls(name=row[0], author=row[1]))
+    def read(self):
+        print(f"The book {self.name} by author {self.author}.\n"
+              f"Price is ${self.price}")
+
+
+# Creating an instance of Product
+apple = Product('Apple', 0.5, 10)
+
+# Creating an instance of Book
+book = Book('Python Programming', 30, 5, 'John Doe')
+
+# Calling the read method of Book
+book.read()
